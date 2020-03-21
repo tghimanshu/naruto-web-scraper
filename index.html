@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NARUTO WEB SCRAPER</title>
+    <style>
+        .character {
+            display: inline-block;
+            width: 100px;
+            background: red;
+            height: auto;
+        }
+        .character img {
+            width: 10px;
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        var data;
+        var a =new XMLHttpRequest();
+        a.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                // console.log(this.responseText);
+                data = this.responseText;
+                var a = JSON.parse(data);
+                console.log(a);
+                a.forEach(res => {
+                    document.write("<div class='character'><h1>"+res.name+"</h1><img src='"+res.imageUrl+"' alt='' width='50' height='50'></div>");
+                });
+
+
+
+            }
+        };
+        a.open('GET','characters.json');
+        a.send();
+    </script>
+</body>
+</html>
